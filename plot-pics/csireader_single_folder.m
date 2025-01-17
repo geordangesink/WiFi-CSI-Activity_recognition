@@ -10,9 +10,12 @@ clear all
 
 % Specify the folder containing the files
 
-            PERSON = 'adrian'
+            CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
+            BW = 20; % Bandwidth
+            CHANNEL = 3;
+            PERSON = 'nobody'
             TYPE = 'gestures'
-            ACTION = 'big_wave'
+            ACTION = 'shake'
             folderPathAction = fullfile('../data', PERSON, TYPE, ACTION);
 
             fileList = dir(folderPathAction);
@@ -25,9 +28,6 @@ clear all
                 end
 
                 %% Configuration
-                CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
-                BW = 20; % Bandwidth
-                CHANNEL = 44;
                 FILE = fullfile(folderPathAction, fileList(k).name);
                 NAME = erase(fileList(k).name, ".pcap");
                 NPKTS_MAX = 5000; % Max number of UDPs to process

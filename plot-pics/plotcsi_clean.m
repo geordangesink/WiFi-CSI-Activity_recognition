@@ -29,13 +29,13 @@ axis tight;
 set(gca, 'Position', [0 0 1 1]); % Expand plot to cover the entire figure
 
 % Save the heatmap plot to an image file
-output_path = strcat('../images/', PERSON, '/', TYPE, '/', ACTION, '/', NAME, '_clean.png');
-%output_path_combined = strcat('../images/combined/', TYPE, '/', ACTION, '/', NAME, '_clean.png');
+output_path = strcat('../images/', string(CHANNEL), '/', PERSON, '/', TYPE, '/', ACTION, '/', NAME, '_clean.png');
+output_path_combined = strcat('../images/',string(CHANNEL),'/combined/', TYPE, '/', ACTION, '/', NAME, '_clean.png');
 set(gcf, 'Units', 'pixels', 'Position', [100, 100, size(csi_mag, 2), size(csi_mag, 1)]);  % Match figure size to data dimensions
 set(gca, 'Units', 'normalized', 'Position', [0 0 1 1]);  % Remove any padding
 
 % Save the figure with exact pixel resolution
 print(gcf, output_path, '-dpng', '-r0');  % '-r0' ensures no scaling, matches pixel dimensions exactly
-%print(gcf, output_path_combined, '-dpng', '-r0'); 
+print(gcf, output_path_combined, '-dpng', '-r0'); 
 close;
 

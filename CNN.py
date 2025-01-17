@@ -8,7 +8,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import matplotlib.pyplot as plt
 
 # Define the base path to your images
-base_path = './images/combined/gestures'
+base_path = './images/3/combined/body_movements'
 
 # Check if the base path exists
 if not os.path.exists(base_path):
@@ -26,7 +26,7 @@ def remove_hidden_files(base_path):
 remove_hidden_files(base_path)
 
 # Parameters
-IMG_SIZE = (128, 128)  # Adjust the size to what works for your data
+IMG_SIZE = (128, 2000)  # Adjust the size to what works for your data
 BATCH_SIZE = 32
 RANDOM_STATE = 42
 
@@ -95,4 +95,5 @@ plt.title('Accuracy over Epochs')
 plt.plot(history.history['accuracy'], label='Training Accuracy')
 plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
 plt.legend(loc='lower right')
+plt.savefig('training_history_channel3-body_movements.png', dpi=300, bbox_inches='tight')
 plt.show()

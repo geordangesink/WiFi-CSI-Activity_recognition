@@ -30,7 +30,7 @@ title(sprintf('Channel: %d, Bandwidth: %d MHz, File: %s', CHANNEL, BW, formatted
 axis tight
 
 % Optional: Save the heatmap plot to an image file
-saveas(gcf, strcat('../figures/', PERSON,'/', TYPE, '/', ACTION, '/', NAME, '.png'));  % Save the heatmap as a PNG image
+saveas(gcf, strcat('../figures/', string(CHANNEL), '/', PERSON,'/', TYPE, '/', ACTION, '/', NAME, '.png'));  % Save the heatmap as a PNG image
 
 close
 end

@@ -8,8 +8,13 @@ clear all
 % The example.pcap file contains 4 (core 0-1, nss 0-1) packets captured on a bcm4358
 %
 
+%% Configuration
+CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
+BW = 20; % Bandwidth
+CHANNEL = 3;
+
 % Specify the folder containing the files
-personList = dir('../data/');
+personList = dir('../data/3');
 
 % Loop through each person in the data folder
 for h = 1:length(personList)
@@ -22,9 +27,9 @@ for h = 1:length(personList)
     end
 
     PERSON = personList(h).name;
-    disp(PERSON);
-    folderPathPerson = fullfile('../data', PERSON);
 
+    folderPathPerson = fullfile('../data',string(CHANNEL), PERSON);
+    disp(folderPathPerson)
     typeList = dir(folderPathPerson);
 
     % Loop through each type in the person folder
@@ -35,7 +40,7 @@ for h = 1:length(personList)
         end
 
         TYPE = typeList(i).name;
-        folderPathType = fullfile('../data', PERSON, TYPE);
+        folderPathType = fullfile('../data',string(CHANNEL), PERSON, TYPE);
 
         actionList = dir(folderPathType);
 
@@ -47,7 +52,7 @@ for h = 1:length(personList)
             end
 
             ACTION = actionList(j).name;
-            folderPathAction = fullfile('../data', PERSON, TYPE, ACTION);
+            folderPathAction = fullfile('../data',string(CHANNEL), PERSON, TYPE, ACTION);
 
             fileList = dir(folderPathAction);
 
@@ -59,9 +64,6 @@ for h = 1:length(personList)
                 end
 
                 %% Configuration
-                CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
-                BW = 20; % Bandwidth
-                CHANNEL = 44;
                 FILE = fullfile(folderPathAction, fileList(k).name);
                 NAME = erase(fileList(k).name, ".pcap");
                 NPKTS_MAX = 5000; % Max number of UDPs to process
