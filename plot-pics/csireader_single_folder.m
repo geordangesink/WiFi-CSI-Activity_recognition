@@ -13,10 +13,11 @@ clear all
             CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
             BW = 20; % Bandwidth
             CHANNEL = 3;
-            PERSON = 'nobody'
-            TYPE = 'gestures'
-            ACTION = 'shake'
-            folderPathAction = fullfile('../data', PERSON, TYPE, ACTION);
+            PERSON = 'sam'
+            TYPE = 'body_movements'
+            ACTION = 'walk_near'
+            folderPathAction = fullfile('../data',string(CHANNEL), PERSON, TYPE, ACTION);
+            disp(folderPathAction)
 
             fileList = dir(folderPathAction);
 

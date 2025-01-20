@@ -1,4 +1,5 @@
 import os
+import random
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -8,7 +9,9 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import matplotlib.pyplot as plt
 
 # Define the base path to your images
-base_path = './images/3/combined/body_movements'
+# this path should have folders containing training images
+# while the folder names will be the class of those images
+base_path = 'path/to/cathegorized/folders'
 
 # Check if the base path exists
 if not os.path.exists(base_path):
@@ -25,8 +28,22 @@ def remove_hidden_files(base_path):
 
 remove_hidden_files(base_path)
 
+# Shuffle the files in the training dataset directory
+def shuffle_training_files(base_path):
+    for class_folder in os.listdir(base_path):
+        class_path = os.path.join(base_path, class_folder)
+        if os.path.isdir(class_path):
+            files = os.listdir(class_path)
+            random.shuffle(files)  # Randomize file order
+            for i, file in enumerate(files):
+                old_path = os.path.join(class_path, file)
+                new_path = os.path.join(class_path, f"{i:06d}_{file}")  # Rename files to maintain order
+                os.rename(old_path, new_path)
+
+shuffle_training_files(base_path)
+
 # Parameters
-IMG_SIZE = (128, 2000)  # Adjust the size to what works for your data
+IMG_SIZE = (64, 1000)  # Adjust the size to what works for your data
 BATCH_SIZE = 32
 RANDOM_STATE = 42
 
