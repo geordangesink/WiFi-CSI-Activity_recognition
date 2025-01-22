@@ -2,6 +2,6 @@
 
 [CNN Original Code](https://github.com/parisafm/CSI-HAR-Dataset)
 
-[CSI extraction setup and plot-pics Original Code in /utils/matlab]([https://github.com/seemoo-lab/nexmon](https://github.com/seemoo-lab/nexmon_csi#usage))
+[CSI extraction setup and plot-pics Original Code in]([https://github.com/seemoo-lab/nexmon](https://github.com/seemoo-lab/nexmon_csi#usage))
 
 [CSI data](https://drive.google.com/drive/folders/1yJz1ZAicUhgHERKWSKR8TAs2jhtzKBLZ?usp=sharing)
