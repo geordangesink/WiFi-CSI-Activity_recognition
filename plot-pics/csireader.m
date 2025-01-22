@@ -2,19 +2,35 @@ clear all
 %% csireader.m
 %
 % Read and plot CSI from UDPs created using the nexmon CSI extractor (nexmon.org/csi)
+%
 % Modify the configuration section to your needs
-% Make sure you run >mex unpack_float.c before reading values from bcm4358 or bcm4366c0 for the first time
 %
-% The example.pcap file contains 4 (core 0-1, nss 0-1) packets captured on a bcm4358
+% Make sure you run >mex unpack_float.c before reading values from bcm4358 or bcm4366c0 chip for the first time
 %
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%   IMPORTANT  %%%%%
+% In order to run this code you need to adjust the configuration
+% and if otherwise unmodified you need a specific directory structure (written in [] can have multiple folders that will all be scanned):
+%
+% ../data/channel/[personNames]/[movementType]/[action]/[*.pcap]
+% ../figures/channel/[personNames]/[movementType]/[action]
+% ../images/channel/[personNames]/[movementType]/[action]
+% ../images/channel/combined/[movementType]/[action]
+%
+% this will scan all the pcaps from the first directory and create figures,
+% as well as images (1px/packet/subcarrier/) for every .pcap file and put
+% them in the respective folders
+%
+% paths the script is searching for and didnt find will be console logged
+%
+% run csireader_single_folder if you wish to only render one folder with pcap files while using the same directory structure
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Configuration
 CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
 BW = 20; % Bandwidth
 CHANNEL = 3;
-
-% Specify the folder containing the files
-personList = dir('../data/3');
+personList = dir('../data/3'); % specify the path to the person folders
 
 % Loop through each person in the data folder
 for h = 1:length(personList)

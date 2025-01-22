@@ -1,3 +1,5 @@
+% JUST RUN THIS CODE, IT ONLY SETS THE CLASS
+
 classdef readpcap < handle
     %READPCAP Summary of this class goes here
     %   Detailed explanation goes here

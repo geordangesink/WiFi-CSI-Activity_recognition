@@ -1,21 +1,18 @@
 clear all
-%% csireader.m
+%% csireader_single_folder.m
 %
 % Read and plot CSI from UDPs created using the nexmon CSI extractor (nexmon.org/csi)
 % Modify the configuration section to your needs
 % Make sure you run >mex unpack_float.c before reading values from bcm4358 or bcm4366c0 for the first time
-%
-% The example.pcap file contains 4 (core 0-1, nss 0-1) packets captured on a bcm4358
-%
 
 % Specify the folder containing the files
 
             CHIP = '43455c0'; % WiFi chip (possible values 4339, 4358, 43455c0, 4366c0)
-            BW = 20; % Bandwidth
-            CHANNEL = 3;
-            PERSON = 'sam'
+            BW = 80; % Bandwidth
+            CHANNEL = 44;
+            PERSON = 'nobody'
             TYPE = 'body_movements'
-            ACTION = 'walk_near'
+            ACTION = 'funny_business_mac_80'
             folderPathAction = fullfile('../data',string(CHANNEL), PERSON, TYPE, ACTION);
             disp(folderPathAction)
 
@@ -31,7 +28,7 @@ clear all
                 %% Configuration
                 FILE = fullfile(folderPathAction, fileList(k).name);
                 NAME = erase(fileList(k).name, ".pcap");
-                NPKTS_MAX = 5000; % Max number of UDPs to process
+                NPKTS_MAX = 10000; % Max number of UDPs to process
 
                 %% Read file
                 HOFFSET = 16; % Header offset
