@@ -86,9 +86,32 @@ def evaluate_model_on_test_data(test_path, model, class_labels):
         cm = confusion_matrix(y_true, y_pred, labels=list(class_labels.keys()))
         cm_percentage = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         cm_percentage = np.nan_to_num(cm_percentage)
-        disp = ConfusionMatrixDisplay(confusion_matrix=cm_percentage, display_labels=list(class_labels.values()))
-        disp.plot(cmap='viridis', xticks_rotation='vertical')
-        plt.title("Confusion Matrix (in %)")
+
+        # Plotting with fixed scale
+        fig, ax = plt.subplots(figsize=(10, 10))  # Adjust size if needed
+        im = ax.imshow(cm_percentage, cmap='viridis', vmin=0, vmax=1)  # Fix scale from 0 to 1
+        
+        # Add tick marks and labels
+        ax.set_xticks(np.arange(len(class_labels)))
+        ax.set_yticks(np.arange(len(class_labels)))
+        ax.set_xticklabels(list(class_labels.values()), rotation=90)
+        ax.set_yticklabels(list(class_labels.values()))
+        plt.xlabel("Predicted")
+        plt.ylabel("True")
+
+        # Add a colorbar with the fixed scale
+        cbar = fig.colorbar(im, ax=ax)
+        cbar.set_label("Proportion")
+
+        # Annotate the matrix with percentage values (all numbers >= 0.5 in black, others yellow)
+        for i in range(len(class_labels)):
+            for j in range(len(class_labels)):
+                value = cm_percentage[i, j]
+                text_color = "yellow" if value < 0.5 else "black"
+                ax.text(j, i, f"{value:.2g}", ha="center", va="center", color=text_color)  # fixed to 2 decimals and delete trailing 0s
+
+        # Finalize the plot
+        plt.title("Confusion Matrix")
         plt.savefig('confusion_matrix_channel3-body_movements_percentage.png', dpi=300, bbox_inches='tight')
         plt.show()
     else:
